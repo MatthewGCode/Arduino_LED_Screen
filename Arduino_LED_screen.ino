@@ -1,26 +1,27 @@
-#include "./letters/letterH.h"
-#include "./letters/letterI.h"
-#include "./letters/nonLetterCharacters.h"
+#include "./letters/letterA.h"
 
 #define TIMES_DRAWN 50
-#define WORD_SIZE 3
 
-const int colPins[5] = {2, 3, 4, 5, 6};
-const int rowPins[8] = { A0, A1, A2, A3, A4, A5, 7, 8};
+const uint8_t colPins[5] = {2, 3, 4, 5, 6};
+const uint8_t rowPins[8] = { A0, A1, A2, A3, A4, A5, 7, 8};
 
-void draw(int letter[8][5]){
-  for(int i = 0; i < TIMES_DRAWN; ++i){
-    for(int yCounter = 0; yCounter < 8; ++yCounter){
-      digitalWrite(rowPins[yCounter], HIGH);
-      for(int xCounter = 0; xCounter < 5; ++xCounter){
-        if(letter[yCounter][xCounter]) digitalWrite(colPins[xCounter], HIGH);
-        else digitalWrite(colPins[xCounter], LOW);
+void draw(uint8_t letter[8]){
+  for(uint8_t i = 0; i < TIMES_DRAWN; ++i){
+    for(uint8_t rowCounter = 0; rowCounter < 8; ++rowCounter){
+      digitalWrite(rowPins[rowCounter], HIGH);
+
+      uint8_t currPixel = 0b10000;
+      for(uint8_t colCounter = 0; colCounter < 5; ++colCounter){
+        if(letter[rowCounter] & (currPixel>>colCounter)) digitalWrite(colPins[colCounter], HIGH);
+        else digitalWrite(colPins[colCounter], LOW);
       }
       delay(2); //2 millis delay makes the image look more clear 
-      digitalWrite(rowPins[yCounter], LOW);
+      digitalWrite(rowPins[rowCounter], LOW);
     }
   }
+  delay(300);
 }
+
 void setup() {
   //col pins
   pinMode(2, OUTPUT);
@@ -41,10 +42,5 @@ void setup() {
 }
 
 void loop() {
-  delay(300);
-  draw(letterH);
-  delay(300);
-  draw(letterI);
-  delay(300);
-  draw(charSmile);
+  draw(letterA);
 }
