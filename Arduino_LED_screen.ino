@@ -1,4 +1,8 @@
-#include "./letters/letterA.h"
+#include "./letters/letterH.h"
+#include "./letters/letterE.h"
+#include "./letters/letterL.h"
+#include "./letters/letterO.h"
+#include "./letters/nonLetterCharacters.h"
 
 #define TIMES_DRAWN 50
 
@@ -42,5 +46,10 @@ void setup() {
 }
 
 void loop() {
-  draw(letterA);
+  draw(letterH);
+  draw(letterE);
+  draw(letterL);
+  draw(letterL);
+  draw(letterO);
+  draw(charSmile);
 }
